@@ -33,14 +33,13 @@ class TreeNode:
         self.left = None
         self.right = None
     
-
 class PropertyBST:
     def __init__(self):
         self.root = None
     
     def insert(self, property: Property):
         if self.root is None:
-            return TreeNode(property)
+            self.root = TreeNode(property)
         self._insert_recursive(self.root, property)
 
     def _insert_recursive(self, node: TreeNode, property: Property):
@@ -50,19 +49,41 @@ class PropertyBST:
             else:
                 self._insert_recursive(node.left, property)
         else:
-            if node.right is NOne:
+            if node.right is None:
                 node.right = TreeNode(property)
             else:
                 self._insert_recursive(node.right, property)
+
+    def search_value(self, value:float, node = None) -> Property:
+        if node is None:
+            return None
+        if node.property.value == value:
+            return property
+        if node.property.value < value:
+            return self.search_value(value, node.left)
+        return self.search_value(value, node.right)
+
+    def search_range(self, min_value: float, max_value: float, node = None) -> list:
+
+    def _search_recursive(self, node: TreeNode, value: float) -> Property:
+
+
     
 # Creating Property instances
 property_1 = Property(address="10322 Urban Oak Trail, Houston, TX", rent=2065, value=272300, tax_rate=2.19, loan_total=160000)
 property_2 = Property(address="9619 Blue Water Hyssop, Conroe, TX", rent=2065, value=361000, tax_rate=2.19, loan_total=0)
 property_3 = Property(address="8125 Loma Terrace Rd, El Paso, TX", rent=1250, value=183700, tax_rate=2, loan_total=0)
 
-#Creating Portfolio instance
+# Creating Portfolio instance
 portfolio = Portfolio()
 portfolio.add_property(property_1)
 portfolio.add_property(property_2)
 portfolio.add_property(property_3)
 portfolio.calculate_total_noi()
+
+# Creating PropertyBST instance
+portfolio_tree = PropertyBST()
+portfolio_tree.insert(property_1)
+portfolio_tree.insert(property_2)
+portfolio_tree.insert(property_3)
+
