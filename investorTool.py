@@ -26,6 +26,39 @@ class Portfolio:
         total_noi = sum(p.calculate_annual_noi() for p in self.properties)
         print(f"Total NOI for the portfolio: ${total_noi}")
         return total_noi
+
+    def total_value(self) -> float:
+        total_val = 0
+        for i in range(len(self.properties)):
+            total_val += self.properties.value[i] 
+        return total_val
+
+    def average_value(self) -> float:
+        average_val = 0
+        for i in range(len(self.properties)):
+            average_val += self.properties[i].value
+        return average_val/len(self.properties)
+    
+    def median_value(self) -> float:
+        mediann_val = 0
+        for i in range(len(self.properties)):
+
+    def highest_value(self) -> Property:
+        # return property that is worth the most
+
+    def lowest_value(self) -> Property:
+        # return property that is worth the least
+
+    def projected_value(self, years: int, growth_rate: float) -> dict:
+        #calculate projected value in x years at y percent
+    
+    def calculate_dtv(self) -> float:
+        # Debt-to-income ratio
+            
+
+
+
+
     
 class TreeNode:
     def __init__(self, property: Property):
@@ -64,8 +97,18 @@ class PropertyBST:
         return self.search_value(value, node.right)
 
     def search_range(self, min_value: float, max_value: float, node = None) -> list:
-
-    def _search_recursive(self, node: TreeNode, value: float) -> Property:
+        results = []
+        if node is None:
+            return []
+        if min_value <= node.value <= max_value:
+            results += self.search_range(min_value, max_value, node.left) 
+            results.append(node.property)
+            results += self.search_range(min_value,max_value,node.right)
+        if node.value > max_value:
+            results +=self.search_range(min_value, max_value, node.left)
+        if node.value < min_value:
+            results += self.search_range(min_value, max_value, node.right)
+        return results
 
 
     
